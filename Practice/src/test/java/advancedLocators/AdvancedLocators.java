@@ -29,7 +29,7 @@ public class AdvancedLocators {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
-        driver.get("https://www.google.com/");
+        driver.navigate().to("https://www.google.com/");
         WebElement searchInputField = driver.findElement(By.name("q"));
         searchInputField.sendKeys("devxschool");
         driver.findElement(By.name("btnK")).click();
@@ -62,7 +62,7 @@ public class AdvancedLocators {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
-        driver.get("https://www.amazon.com/");
+        driver.navigate().to("https://www.amazon.com/");
         driver.findElement(By.cssSelector("#twotabsearchtextbox")).sendKeys("iphone" + Keys.ENTER);
         Thread.sleep(3000);
 
@@ -101,6 +101,56 @@ public class AdvancedLocators {
         subfolders.get(1).click();
 
         Assert.assertTrue(subfolders.size() == 3 && subfolders.get(1).isSelected());
+
+    }
+
+
+    @Test
+    public void test4() throws InterruptedException{
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+
+        driver.get("https://opensource-demo.orangehrmlive.com/");
+
+        String username = "Admin";
+        String password = "admin123";
+
+        WebElement usernameInputField = driver.findElement(By.xpath("//input[@id='txtUsername']"));
+        WebElement passwordInputFiled = driver.findElement(By.xpath("//input[@id='txtPassword']"));
+        WebElement loginButton = driver.findElement(By.xpath("//input[@class='button']"));
+
+        usernameInputField.sendKeys(username);
+        passwordInputFiled.sendKeys(password);
+        loginButton.click();
+        Thread.sleep(3000);
+
+        WebElement welcomeText = driver.findElement(By.xpath("//a[contains(text(),'Welcome')]"));
+
+        Assert.assertTrue(welcomeText.getText().contains(username));
+
+    }
+
+    @Test
+    public void test5(){
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+
+        driver.get("https://demoqa.com/radio-button");
+        driver.findElement(By.xpath("//label[@for='yesRadio']")).click();
+
+        List<WebElement> radioButtonLabels = driver.findElements(By.xpath("//input[contains(@id,'Radio')]/following-sibling::label"));
+        List<WebElement> radioButtons = driver.findElements(By.xpath("//input[contains(@id,'Radio')]"));
+
+        for (WebElement radio:radioButtons) {
+            if(radio.isSelected()){
+                System.out.println("This button is selected: ");
+            }
+            System.out.println(radio.getText());
+        }
 
 
 
