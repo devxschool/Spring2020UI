@@ -29,7 +29,7 @@ public class AdvancedLocators {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
-        driver.get("https://www.google.com/");
+        driver.navigate().to("https://www.google.com/");
         WebElement searchInputField = driver.findElement(By.name("q"));
         searchInputField.sendKeys("devxschool");
         driver.findElement(By.name("btnK")).click();
@@ -62,7 +62,7 @@ public class AdvancedLocators {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
-        driver.get("https://www.amazon.com/");
+        driver.navigate().to("https://www.amazon.com/");
         driver.findElement(By.cssSelector("#twotabsearchtextbox")).sendKeys("iphone" + Keys.ENTER);
         Thread.sleep(3000);
 

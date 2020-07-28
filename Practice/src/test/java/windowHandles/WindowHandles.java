@@ -6,9 +6,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.internal.WebElementToJsonConverter;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +31,8 @@ public class WindowHandles {
 
     @After
     public void tearDown(){
-        driver.close(); //--> closing current window only, if you have only one window open it would close the window and the browser
-        driver.quit(); //->closing all the open windows, closing the browser
+        //driver.close(); //--> closing current window only, if you have only one window open it would close the window and the browser
+        //driver.quit(); //->closing all the open windows, closing the browser
     }
 
     @Test
@@ -65,6 +68,33 @@ public class WindowHandles {
         driver.findElement(By.linkText("Menu")).click();
 
         Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Check Out'][1]")).isDisplayed());
+
+    }
+
+    @Test
+    public void test3() throws InterruptedException{
+
+        driver.get("https://www.google.com/");
+        Thread.sleep(2000);
+        driver.get("https://www.amazon.com/");
+        Thread.sleep(2000);
+        driver.navigate().back();
+
+    }
+
+    @Test
+    public void test4() throws InterruptedException {
+        driver.get("http://www.uitestpractice.com/");
+
+        driver.switchTo().frame("aswift_5");
+
+        Actions action = new Actions(driver);
+        action.keyDown(Keys.CONTROL).click(driver.findElement(By.xpath("//li[text()='1']")))
+                .click(driver.findElement(By.xpath("//li[text()='3']"))).
+        click(driver.findElement(By.xpath("//li[text()='8']"))).keyUp(Keys.CONTROL).perform();
+
+
+
 
     }
 
