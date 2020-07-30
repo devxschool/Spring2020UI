@@ -5,10 +5,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -100,6 +97,8 @@ public class AdvancedMouseInteractions {
         driver.navigate().to("https://demoqa.com/slider");
         //range-slider__tooltip__arrow
         WebElement slider = driver.findElement(By.xpath("//input[@type='range']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('style', arguments[1])", slider, "border:2px solid yellow");
         Actions actions = new Actions(driver);
 
         actions.clickAndHold(slider).moveByOffset(20,0).release().perform();
