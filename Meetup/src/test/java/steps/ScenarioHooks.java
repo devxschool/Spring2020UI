@@ -19,8 +19,8 @@ public class ScenarioHooks {
     public void tearDown(Scenario scenario){
 
         try{
-            if(scenario.isFailed()){
-                //this is the code to take a screenshot
+               if(scenario.isFailed()){
+                    //this is the code to take a screenshot
                 final byte[] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
                 scenario.embed(screenshot, "image/png");
             }
